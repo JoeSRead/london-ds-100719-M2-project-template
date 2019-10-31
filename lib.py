@@ -1,7 +1,18 @@
 # You don't have to use these classes, but we recommend them as a good place to start!
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 
 class MongoHandler():
     pass
 
+
 class WeatherGetter():
-    pass
+    def __init__(self):
+        # Let's set our secrets and keys from the .env file
+        # as environment variables.
+        self.BASE_URL = 'https://api.darksky.net'
+        self.token = os.getenv('DARKSKY_KEY')
+        if len(self.token) == 0:
+            raise ValueError('Missing DarkSky API key!')
